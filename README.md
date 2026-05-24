@@ -4,6 +4,8 @@ A Hellenistic astrology lead-magnet tool built for [Dana Solara](https://danasol
 
 **Live:** [fortune.danasolara.com](https://fortune.danasolara.com)
 
+<img width="900" height="2358" alt="image" src="https://github.com/user-attachments/assets/c713327a-35ec-4293-9745-16f7ddc84fdf" />
+
 A visitor enters their birth details and receives:
 
 1. Their **Lot of Fortune** placement (Hellenistic "soul curriculum" calculation).
@@ -163,7 +165,7 @@ If you have:
 
 …I can build the tool, get the math right, train the AI to sound like you, and deliver something that converts.
 
-**Contact:** Michael Augustine — reach out through the GitHub profile linked on this repo, or via Upwork.
+**Contact:** Michael Augustine (maugustine78@gmail.com) — reach out through the GitHub profile linked on this repo or via Upwork.
 
 ---
 
