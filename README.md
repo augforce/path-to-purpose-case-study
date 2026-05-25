@@ -135,7 +135,7 @@ A small shared module deduplicates the auth helper, JSON response wrapper, and t
 | Geo | GeoNames | The data source most chart providers proxy, with the regional fields preserved. |
 | Chart math | AstrologyAPI | Solid western-chart calculations. House system remapping done locally. |
 | LLM | Anthropic Claude (Sonnet 4.6) | Strong instruction-following for voice rules. Prompt built server-side. |
-| Typography | Cormorant Garamond + DM Sans | Matches the client's existing brand. |
+| Typography | Fraunces + Karla | Matches the client's existing brand. |
 
 The whole thing fits in under 700 lines of code across all files.
 
