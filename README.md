@@ -4,7 +4,7 @@ A Hellenistic astrology lead-magnet tool built for [Dana Solara](https://danasol
 
 **Live:** [fortune.danasolara.com](https://fortune.danasolara.com)
 
-<img width="900" height="1900" alt="image" src="https://github.com/user-attachments/assets/10ae1750-b607-4714-a0e3-a6fc1d57bdd2" />
+<img width="900" height="841" alt="image" src="https://github.com/user-attachments/assets/1c2fdf6f-038c-482b-959b-7bb2c9436d0e" />
 
 A visitor enters their birth details and receives:
 
