@@ -2,8 +2,6 @@
 
 A Hellenistic astrology lead-magnet tool built for [Dana Solara](https://danasolara.com), a self-help educator working with millennial women on patterns of self-abandonment and chronic people-pleasing.
 
-**Live:** [fortune.danasolara.com](https://fortune.danasolara.com)
-
 <img width="900" height="841" alt="image" src="https://github.com/user-attachments/assets/1c2fdf6f-038c-482b-959b-7bb2c9436d0e" />
 
 A visitor enters their birth details and receives:
