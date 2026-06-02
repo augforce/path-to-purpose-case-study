@@ -2,7 +2,7 @@
 
 A Hellenistic astrology lead-magnet tool built for [Dana Solara](https://danasolara.com), a self-help educator working with millennial women on patterns of self-abandonment and chronic people-pleasing.
 
-<img width="900" height="841" alt="image" src="https://github.com/user-attachments/assets/1c2fdf6f-038c-482b-959b-7bb2c9436d0e" />
+<img width="900" height="1217" alt="Path to Purpose lead magnet — birth details form" src="screenshots/01-form.png" />
 
 A visitor enters their birth details and receives:
 
