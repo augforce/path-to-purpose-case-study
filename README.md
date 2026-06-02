@@ -8,14 +8,13 @@ A visitor enters their birth details and receives:
 
 1. Their **Lot of Fortune** placement (Hellenistic "soul curriculum" calculation).
 2. A 180–220 word interpretation written in the client's voice via the Anthropic Claude API.
-3. A **Zodiacal Releasing** timeline mapped to whole-sign houses with traditional planetary rulers, current chapter highlighted.
-4. Locked teasers for the rest of the client's paid program plus a webinar CTA.
+3. An invitation into the client's paid program via a webinar CTA.
 
 ---
 
 ## The result
 
-| Form | City disambiguation | Loading | Reading + timeline |
+| Form | City disambiguation | Loading | Reading |
 |---|---|---|---|
 | ![form](screenshots/01-form.png) | ![disambig](screenshots/02-disambiguation.png) | ![loading](screenshots/03-loading.png) | ![result](screenshots/04-result.png) |
 
@@ -43,6 +42,8 @@ const isDayChart = sunFromAsc > 180;
 ```
 
 Each of these took real debugging against a canonical test case (a known birth with known correct output) before shipping.
+
+The live lead magnet was later streamlined to center on the Lot of Fortune, a product call by the client. The Zodiacal Releasing engine that drove the timeline stays in the codebase.
 
 ### 2. Brand voice had to survive every generation
 
@@ -110,6 +111,7 @@ Browser ──fetch──> /api/geo      ──> GeoNames     /searchJSON   (sty
                    /api/chart    ──> AstrologyAPI /v1/western_chart_data
                    /api/reading  ──> Anthropic    /v1/messages
                                      (prompt built here, never on the client)
+                   /api/lead     ──> GoHighLevel  webhook (email capture)
 ```
 
 Each Pages Function is a focused proxy:
@@ -128,14 +130,14 @@ A small shared module deduplicates the auth helper, JSON response wrapper, and t
 | Layer | Choice | Why |
 |---|---|---|
 | Hosting | Cloudflare Pages | Free tier covers a lead magnet comfortably, global edge, deploy-on-push from `main`. |
-| Server logic | Cloudflare Pages Functions | Three short proxies, no container, no cold starts to manage. |
+| Server logic | Cloudflare Pages Functions | Four short proxies, no container, no cold starts to manage. |
 | Frontend | One static HTML file | Loads instantly, no build step, easy for the client to share via iframe. |
 | Geo | GeoNames | The data source most chart providers proxy, with the regional fields preserved. |
 | Chart math | AstrologyAPI | Solid western-chart calculations. House system remapping done locally. |
 | LLM | Anthropic Claude (Sonnet 4.6) | Strong instruction-following for voice rules. Prompt built server-side. |
 | Typography | Fraunces + Karla | Matches the client's existing brand. |
 
-The whole thing fits in under 700 lines of code across all files.
+The whole thing stays lean, around a thousand lines of code across all files.
 
 ---
 
