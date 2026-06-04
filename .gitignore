@@ -1,2 +1,5 @@
 .DS_Store
 *.log
+
+# Internal planning / pricing docs — must never reach this public repo
+path to purpose documents/
