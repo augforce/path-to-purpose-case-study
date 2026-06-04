@@ -43,7 +43,7 @@ const isDayChart = sunFromAsc > 180;
 
 Each of these took real debugging against a canonical test case (a known birth with known correct output) before shipping.
 
-The live lead magnet was later streamlined to center on the Lot of Fortune, a product call by the client. The Zodiacal Releasing engine that drove the timeline stays in the codebase.
+The live lead magnet was later streamlined to center on the Lot of Fortune, a product call by the client. The Zodiacal Releasing timeline the math originally supported was retired at the client's request once the tool narrowed its focus.
 
 ### 2. Brand voice had to survive every generation
 
@@ -102,16 +102,30 @@ The chart computation and the LLM reading are intentionally not cached. Charts a
 
 ---
 
+## A second tool: The Lot Reader
+
+The lead magnet earns the email. The paid program needed a tool of its own.
+
+The Lot Reader is a member-facing report generator behind the program's membership gate. Where the public tool computes a single lot (Fortune), this one computes all seven Hermetic Lots — Fortune, Spirit, Eros, Necessity, Courage, Victory, and Nemesis — with the same sect-aware, whole-sign Hellenistic math. It generates a reading and three reflection questions for each lot (seven Claude calls run in parallel), presents them in a pill-navigated report, and exports a clean Google Doc shared straight to the client's inbox.
+
+It reuses the same geo and chart proxies and the same server-side prompt discipline. Two things were new:
+
+- A new endpoint, `/api/export-doc`, builds the document and shares it via the Google Docs and Drive APIs. Auth is an OAuth2 refresh-token flow, since service-account keys were blocked by org policy.
+- The reading endpoint gained a per-lot prompt mode, so each of the seven lots is interpreted on its own terms rather than as a generic placement.
+
+---
+
 ## Architecture
 
 All upstream API access is server-side via Cloudflare Pages Functions. The browser never sees any vendor API keys, prompts, or business rules.
 
 ```
-Browser ──fetch──> /api/geo      ──> GeoNames     /searchJSON   (style=FULL)
-                   /api/chart    ──> AstrologyAPI /v1/western_chart_data
-                   /api/reading  ──> Anthropic    /v1/messages
-                                     (prompt built here, never on the client)
-                   /api/lead     ──> GoHighLevel  webhook (email capture)
+Browser ──fetch──> /api/geo         ──> GeoNames     /searchJSON   (style=FULL)
+                   /api/chart       ──> AstrologyAPI /v1/western_chart_data
+                   /api/reading     ──> Anthropic    /v1/messages
+                                        (prompt built here, never on the client)
+                   /api/lead        ──> GoHighLevel  webhook (email capture)
+                   /api/export-doc  ──> Google Docs + Drive (member report export)
 ```
 
 Each Pages Function is a focused proxy:
@@ -130,8 +144,8 @@ A small shared module deduplicates the auth helper, JSON response wrapper, and t
 | Layer | Choice | Why |
 |---|---|---|
 | Hosting | Cloudflare Pages | Free tier covers a lead magnet comfortably, global edge, deploy-on-push from `main`. |
-| Server logic | Cloudflare Pages Functions | Four short proxies, no container, no cold starts to manage. |
-| Frontend | One static HTML file | Loads instantly, no build step, easy for the client to share via iframe. |
+| Server logic | Cloudflare Pages Functions | Five short proxies, no container, no cold starts to manage. |
+| Frontend | Static HTML, one file per tool | Loads instantly, no build step, easy for the client to share via iframe. |
 | Geo | GeoNames | The data source most chart providers proxy, with the regional fields preserved. |
 | Chart math | AstrologyAPI | Solid western-chart calculations. House system remapping done locally. |
 | LLM | Anthropic Claude (Sonnet 4.6) | Strong instruction-following for voice rules. Prompt built server-side. |
